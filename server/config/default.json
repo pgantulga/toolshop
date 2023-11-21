@@ -1,0 +1,8 @@
+{
+  "appEnv": "development",
+  "appPrivateKey": "defaultPrivateKey",
+  "db": {
+    "name": "toolshop",
+    "connectionString": "mongodb://localhost:37017/"
+  }
+}

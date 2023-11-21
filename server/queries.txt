@@ -1,0 +1,196 @@
+mutation {
+  addTool(name:"Jackhammer", price:75){
+	name
+  }
+}
+
+mutation {
+  addBook(name:"Plants", genre:"Non-Fiction", author:"60d174211bcc6746b6d55967"){
+	name
+	genre
+	author
+  }
+}
+
+query {
+  tools {
+	_id
+	name
+	price
+  }
+}
+
+query {
+  book(id: "60d174ed1bcc6746b6d5596b") {
+	_id
+	name
+	price
+  }
+}
+
+query {
+  searchBooks(name: "book name here") {
+	_id
+	name
+	genre
+	author
+  }
+}
+
+query {
+  authors {
+	_id
+	name
+	age
+  }
+}
+
+mutation {
+   addBook(input: {
+     name: "fred2"
+     genre: "Fitz"
+     author: "62b114cfe9a2396383811ac5"
+   }) {
+     _id
+     name
+     genre
+     author
+   }
+ }
+
+
+mutation AddBook($name:String, $genre:String, $author:ID){
+   addBook(input: {
+     name: $name
+     genre: $genre
+     author: $author
+   }) {
+     _id
+     name
+     genre
+     author
+       author_relate {
+      name
+    }
+   }
+ }
+
+
+ mutation {
+	deleteBook(id:"62b388426c6a36331df29970"){
+    name
+    genre
+  }
+}
+
+
+mutation EditBook($id:ID, $name:String, $genre:String, $author:ID){
+   editBook(input: {
+     id: $id
+     name: $name
+     genre: $genre
+     author: $author
+   }) {
+     _id
+     name
+     genre
+     author
+       author_relate {
+      name
+    }
+   }
+ }
+
+ mutation AddAuthor($name:String, $age:Int){
+   addAuthor(input: {
+     name: $name
+     age: $age
+   }) {
+     _id
+     name
+     age
+   }
+ }
+
+
+
+////////////USER Queries 
+
+# Create a new user
+mutation {
+  createUser(input: {
+    username: "johndoe",
+    email: "johndoe@example.com",
+    password: "password123"
+  }) {
+    id
+    username
+    email
+    password
+    createdAt
+  }
+}
+
+# Get a user by ID
+query {
+  getUser(id: "USER_ID_HERE") {
+    id
+    username
+    email
+    password
+    createdAt
+  }
+}
+
+# Get all users
+query {
+  getUsers {
+    id
+    username
+    email
+    password
+    createdAt
+  }
+}
+
+# Update a user by ID
+mutation {
+  updateUser(id: "USER_ID_HERE", input: {
+    username: "janedoe",
+    email: "janedoe@example.com",
+    password: "newpassword123"
+  }) {
+    id
+    username
+    email
+    password
+    createdAt
+  }
+}
+
+# Delete a user by ID
+mutation {
+  deleteUser(id: "USER_ID_HERE") {
+    id
+    username
+    email
+    password
+    createdAt
+  }
+}
+
+#Login
+mutation Login($input: LoginInput!) {
+  login(input: $input) {
+    token
+    username
+    email
+  }
+}
+#Login Variables
+{
+  "input": {
+    "email": "daniel@daniel.com",
+    "password": "daniel"
+  }
+}
